@@ -11,11 +11,11 @@
 
 주문리스트
 	
-	<h2>tiger의 주문리스트</h2>
+	<h2>hong의 주문리스트</h2>
 	<hr>
-	<c:forEach items="${userOrderDtos }" var="oDto">
-		주문번호 : ${oDto.orderid }
-		주문상품이름 : ${oDto.ordername }
+	<c:forEach items="${userOrderDtos }" var="ODto">
+		주문번호 : ${ODto.orderid }
+		주문상품이름 : ${ODto.ordername }
 		<hr>
 	</c:forEach>
 

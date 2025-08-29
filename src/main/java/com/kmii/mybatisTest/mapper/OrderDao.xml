@@ -7,7 +7,7 @@
  	<select id="userOrderListDao" resultType="com.kmii.mybatisTest.dto.UserOrderDto">
 	 	
 		SELECT u.userid, u.username, o.orderid, o.ordername
-	 		FROM springdb.user u
+	 		FROM springdb.usertbl u
 	 			INNER JOIN springdb.order o ON u.userid = o.userid
 	 				WHERE u.userid= #{param1}
 	 	
