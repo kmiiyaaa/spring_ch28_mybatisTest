@@ -12,23 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kmii.mybatisTest.dao.IDao;
 import com.kmii.mybatisTest.dto.IDto;
-import com.kmii.mybatisTest.service.BoardService;
 
 @Controller
 public class BoardController {
 	
 	@Autowired  
 	private SqlSession sqlSession;    //DI(의존성 자동주입)
-	
-//	@Autowired
-//	private BoardService boardService;
-	
+
 	@RequestMapping(value="/boardList")
 	public String boardList(HttpServletRequest request, Model model) {
 		
 		IDao idao = sqlSession.getMapper(IDao.class);
 		List<IDto> iDtos = idao.boardListDao(); 
-		
 		//int bCount = boardService.getBoardCount();  서비스 사용시 
 		int bCount = idao.boardCountDao();
 		
@@ -87,9 +82,51 @@ public class BoardController {
 		String bnum = request.getParameter("bnum");
 		
 		
+		IDao idao = sqlSession.getMapper(IDao.class);
+		IDto iDto = idao.boardContentViewDao(bnum);
+		
+		model.addAttribute("iDto", iDto);
+		
 		return "contentView";
 	}
 	
+	@RequestMapping(value="/contentModify")
+	public String contentModify(HttpServletRequest request, Model model) {
+		
+		String bnum = request.getParameter("bnum");
+		
+		
+		IDao idao = sqlSession.getMapper(IDao.class);
+		IDto iDto = idao.boardContentViewDao(bnum);
+		
+		model.addAttribute("iDto", iDto);
+		
+		return "contentModify";
+	}
+	
+	@RequestMapping(value = "/contentModifyOk")
+	public String contentModifyOk(HttpServletRequest request, Model model){
+		
+		String bnum = request.getParameter("bnum");
+		String btitle = request.getParameter("btitle");
+        String bcontent = request.getParameter("bcontent");
+        String bname = request.getParameter("bname"); 
+
+        IDao idao = sqlSession.getMapper(IDao.class);
+       int result =  idao.boardModifyDao(bnum, btitle, bcontent, bname); //1이면 성공 . 0이면 실패
+       
+       if(result==0) {
+    	   return "redirect:contentModify?bnum=" + bnum;
+       }
+       
+       IDto iDto = idao.boardContentViewDao(bnum);
+       model.addAttribute("iDto", iDto);
+        
+       
+		return "contentView";
+		
+		
+	}
 	
 	
 

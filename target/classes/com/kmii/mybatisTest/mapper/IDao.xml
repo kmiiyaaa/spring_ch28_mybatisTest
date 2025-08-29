@@ -22,8 +22,16 @@
 		DELETE FROM boardtbl WHERE bnum = #{param1}
 	</delete>
 	
-	<select id="" resultType="int">
+	<select id="boardCountDao" resultType="int">
 		SELECT COUNT(*) FROM boardtbl
 	</select>
+	
+	<select id="boardContentViewDao" resultType="com.kmii.mybatisTest.dto.IDto"> <!--  boardList 여러개나 한개나 dto에서 가져오면 된다 -->
+		SELECT * FROM boardtbl WHERE bnum=#{pram1}
+	</select>
+	
+	<update id="boardModifyDao">
+		UPDATE boardtbl SET btitle=#{param2}, bcontent=#{param3}, bname=#{param4} WHERE bnum=#{param1}  <!--  IDao 에서 정한 순서에따라 param번호 넣어준다 -->
+	</update>
 
 </mapper>
