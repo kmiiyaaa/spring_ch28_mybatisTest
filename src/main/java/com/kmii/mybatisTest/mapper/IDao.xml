@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="boardContentViewDao" resultType="com.kmii.mybatisTest.dto.IDto"> <!--  boardList 여러개나 한개나 dto에서 가져오면 된다 -->
-		SELECT * FROM boardtbl WHERE bnum=#{pram1}
+		SELECT * FROM boardtbl WHERE bnum=#{praam1}
 	</select>
 	
 	<update id="boardModifyDao">
