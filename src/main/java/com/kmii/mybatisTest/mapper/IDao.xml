@@ -8,5 +8,22 @@
 	<select id="boardListDao" resultType="com.kmii.mybatisTest.dto.IDto">  <!--  list에 담겨있지만 list는 써주지 않고 dto만 -->
 		SELECT * FROM boardtbl ORDER BY bnum DESC
 	</select>
+	
+	<insert id="boardWriteDao">
+	<!-- INSERT INTO boardtbl(btitle,bcontent,bname,bhit) VALUES(#{param1}, #{param2}, #{param3}, 0) 
+	 여러개일땐 매개변수이름 그대로 적으면 안된다. -> param으로! -->
+	 
+	  INSERT INTO boardtbl(btitle,bcontent,bname,bhit) VALUES(#{btitle}, #{bcontent}, #{bname}, 0)
+		<!--  dao에서 param이름 먼저 설정해주면 param말고 적어도된다 -->
+		
+	</insert>
+	
+	<delete id="boardDeleteDao">
+		DELETE FROM boardtbl WHERE bnum = #{param1}
+	</delete>
+	
+	<select id="" resultType="int">
+		SELECT COUNT(*) FROM boardtbl
+	</select>
 
 </mapper>
